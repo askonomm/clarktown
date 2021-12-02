@@ -4,10 +4,14 @@
 
 
 (defn is?
+  "Determines if the current block is an empty block or not."
   [block]
-  (string/blank? (string/trim block)))
+  (-> (string/replace block #"\n" "")
+      string/trim
+      string/blank?))
 
 
 (defn render
+  "Renders an empty block."
   [block]
-  "emptyblockgoeshere")
+  "")
