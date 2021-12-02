@@ -1,6 +1,7 @@
 (ns clarktown.core
   (:require
     [clojure.string :as string]
+    [clarktown.parsers.bold :as bold]
     [clarktown.parsers.empty-block :as empty-block]
     [clarktown.parsers.heading-block :as heading-block]))
 
@@ -9,7 +10,8 @@
   [{:matcher empty-block/is?
     :renderers [empty-block/render]}
    {:matcher heading-block/is?
-    :renderers [heading-block/render]}])
+    :renderers [bold/render
+                heading-block/render]}])
 
 
 (defn find-parser-by-block
