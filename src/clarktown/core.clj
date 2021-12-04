@@ -2,6 +2,10 @@
   (:require
     [clojure.string :as string]
     [clarktown.parsers.bold :as bold]
+    [clarktown.parsers.italic :as italic]
+    [clarktown.parsers.inline-code :as inline-code]
+    [clarktown.parsers.strikethrough :as strikethrough]
+    [clarktown.parsers.link-and-image :as link-and-image]
     [clarktown.parsers.empty-block :as empty-block]
     [clarktown.parsers.heading-block :as heading-block]))
 
@@ -11,10 +15,45 @@
     :renderers [empty-block/render]}
    {:matcher heading-block/is?
     :renderers [bold/render
+                italic/render
+                inline-code/render
+                strikethrough/render
                 heading-block/render]}])
 
 
-(defn find-parser-by-block
+(defn- stitch-code-blocks
+  "Since code blocks can span multiple blocks (a block is separated by
+  two line breaks from another block) , we need to stitch them together
+  into one block in order for a block parser to be able to do anything
+  with it."
+  [blocks]
+  (loop [stitched-blocks []
+         code-block-started? false
+         blocks blocks]
+    (if (empty? blocks)
+      stitched-blocks
+      (let [block (first blocks)]
+        (if (and (string/starts-with? (string/trim block) "```")
+                 (not (string/ends-with? (string/trim block) "```")))
+          (recur (conj stitched-blocks block)
+                 true
+                 (drop 1 blocks))
+          (if code-block-started?
+            (let [last-block (last stitched-blocks)
+                  last-block-index (- (count stitched-blocks) 1)]
+              (if (string/ends-with? (string/trim block) "```")
+                (recur (assoc stitched-blocks last-block-index (str last-block "\n\n" block))
+                       false
+                       (drop 1 blocks))
+                (recur (assoc stitched-blocks last-block-index (str last-block "\n\n" block))
+                       true
+                       (drop 1 blocks))))
+            (recur (conj stitched-blocks block)
+                   false
+                   (drop 1 blocks))))))))
+
+
+(defn- find-parser-by-block
   "Find a parser from `parsers` that matches the given `block`."
   [parsers block]
   (->> parsers
@@ -24,7 +63,7 @@
        first))
 
 
-(defn parse-block-with-known-parser
+(defn- parse-block-with-known-parser
   "Parses a given `block` with a known `parser`."
   [parser block]
   (loop [block block
@@ -67,7 +106,9 @@
 (defn- parse
   "Parses given `markdown` with `parsers`."
   [markdown parsers]
-  (let [blocks (string/split markdown #"\n\n")
+  (let [blocks (-> (string/split markdown #"\n\n")
+                   stitch-code-blocks)
+        _ (prn (for [block blocks] (do (prn block) (prn ""))))
         parsed-blocks (parse-blocks blocks parsers)]
     (string/join "" parsed-blocks)))
 
@@ -79,7 +120,7 @@
   A parser is a map that consists of two things;
   - A matcher (optional) , which returns a truthy or falsey value
   - Renderers, which will be run on the a block when matcher returns true.
-    There can be any number of renderers.
+    There can be any number of renderers. Each renderer must return a string.
 
   Each matcher, and each renderer have to be a function that take a single
   argument, which is a given Markdown block.
@@ -93,6 +134,3 @@
    (render markdown default-parsers))
   ([markdown parsers]
    (parse markdown parsers)))
-
-
-(render (slurp "/Users/asko/Documents/work/clarktown/test.md"))
