@@ -7,18 +7,27 @@
     [clarktown.parsers.strikethrough :as strikethrough]
     [clarktown.parsers.link-and-image :as link-and-image]
     [clarktown.parsers.empty-block :as empty-block]
+    [clarktown.parsers.horizontal-line-block :as horizontal-line-block]
     [clarktown.parsers.heading-block :as heading-block]))
 
 
 (def default-parsers
   [{:matcher empty-block/is?
     :renderers [empty-block/render]}
+   {:matcher horizontal-line-block/is?
+    :renderers [horizontal-line-block/render]}
    {:matcher heading-block/is?
     :renderers [bold/render
                 italic/render
                 inline-code/render
                 strikethrough/render
-                heading-block/render]}])
+                link-and-image/render
+                heading-block/render]}
+   {:renderers [bold/render
+                italic/render
+                inline-code/render
+                strikethrough/render
+                link-and-image/render]}])
 
 
 (defn- stitch-code-blocks
@@ -108,7 +117,6 @@
   [markdown parsers]
   (let [blocks (-> (string/split markdown #"\n\n")
                    stitch-code-blocks)
-        _ (prn (for [block blocks] (do (prn block) (prn ""))))
         parsed-blocks (parse-blocks blocks parsers)]
     (string/join "" parsed-blocks)))
 
