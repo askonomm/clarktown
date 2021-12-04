@@ -16,10 +16,10 @@
   [block]
   (let [single-line-block (-> (string/replace block #"\n" "")
                               string/trim)
-        size-indicators (-> (string/split single-line-block #" ")
-                            first
-                            string/trim)
-        size (count size-indicators)
+        size (-> (string/split single-line-block #" ")
+                 first
+                 string/trim
+                 count)
         value (->> (string/split single-line-block #" ")
                    next
                    (string/join " ")
