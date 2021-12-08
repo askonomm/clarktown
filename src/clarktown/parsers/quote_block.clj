@@ -16,8 +16,9 @@
   "Renders a quote block."
   [block parsers]
   (let [matches (re-seq #">.*" block)
-        blocks (for [match matches]
-                  (-> (subs match 1)
-                      string/trim
-                      (parser/parse parsers)))]
-    (str "<blockquote>" (string/join "\n" blocks) "</blockquote>")))
+        blocks (->> (for [match matches]
+                      (-> (subs match 1)
+                          string/trim))
+                    (string/join "\n"))
+        block (parser/parse blocks parsers)]
+    (str "<blockquote>" block "</blockquote>")))
