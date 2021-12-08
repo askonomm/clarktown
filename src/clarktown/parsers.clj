@@ -8,7 +8,8 @@
     [clarktown.parsers.empty-block :as empty-block]
     [clarktown.parsers.horizontal-line-block :as horizontal-line-block]
     [clarktown.parsers.quote-block :as quote-block]
-    [clarktown.parsers.heading-block :as heading-block]))
+    [clarktown.parsers.heading-block :as heading-block]
+    [clarktown.parsers.paragraph-block :as paragraph-block]))
 
 
 (def parsers
@@ -29,4 +30,6 @@
                 italic/render
                 inline-code/render
                 strikethrough/render
-                link-and-image/render]}])
+                link-and-image/render
+                paragraph-block/render]}])
+
