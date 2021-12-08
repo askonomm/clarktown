@@ -12,5 +12,5 @@
 
 (defn render
   "Renders the horizontal line block."
-  [_]
+  [_ _]
   "<hr>")

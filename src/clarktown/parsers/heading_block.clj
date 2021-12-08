@@ -13,7 +13,7 @@
 
 (defn render
   "Renders the heading block."
-  [block]
+  [block _]
   (let [single-line-block (-> (string/replace block #"\n" "")
                               string/trim)
         size (-> (string/split single-line-block #" ")

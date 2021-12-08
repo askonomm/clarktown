@@ -13,5 +13,5 @@
 
 (defn render
   "Renders an empty block."
-  [block]
+  [block _]
   "")
