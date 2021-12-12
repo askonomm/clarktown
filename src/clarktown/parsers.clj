@@ -9,6 +9,7 @@
     [clarktown.parsers.horizontal-line-block :as horizontal-line-block]
     [clarktown.parsers.quote-block :as quote-block]
     [clarktown.parsers.heading-block :as heading-block]
+    [clarktown.parsers.code-block :as code-block]
     [clarktown.parsers.paragraph-block :as paragraph-block]))
 
 
@@ -26,10 +27,11 @@
                 heading-block/render]}
    {:matcher quote-block/is?
     :renderers [quote-block/render]}
+   {:matcher code-block/is?
+    :renderers [code-block/render]}
    {:renderers [bold/render
                 italic/render
                 inline-code/render
                 strikethrough/render
                 link-and-image/render
                 paragraph-block/render]}])
-
