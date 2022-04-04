@@ -10,6 +10,8 @@
     [clarktown.parsers.quote-block :as quote-block]
     [clarktown.parsers.heading-block :as heading-block]
     [clarktown.parsers.code-block :as code-block]
+    [clarktown.parsers.unordered-list-block :as unordered-list-block]
+    [clarktown.parsers.ordered-list-block :as ordered-list-block]
     [clarktown.parsers.paragraph-block :as paragraph-block]))
 
 
@@ -29,6 +31,20 @@
     :renderers [quote-block/render]}
    {:matcher code-block/is?
     :renderers [code-block/render]}
+   {:matcher unordered-list-block/is?
+    :renderers [bold/render
+                italic/render
+                inline-code/render
+                strikethrough/render
+                link-and-image/render
+                unordered-list-block/render]}
+   {:matcher ordered-list-block/is?
+    :renderers [bold/render
+                italic/render
+                inline-code/render
+                strikethrough/render
+                link-and-image/render
+                ordered-list-block/render]}
    {:renderers [bold/render
                 italic/render
                 inline-code/render

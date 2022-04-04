@@ -27,4 +27,4 @@
    (parser/parse markdown given-parsers)))
 
 
-(render (slurp "/Users/asko/Documents/work/clarktown/quote-block.md"))
+(render (slurp "/Users/asko/work/clarktown/test.md"))

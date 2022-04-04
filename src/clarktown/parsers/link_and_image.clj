@@ -4,7 +4,7 @@
 
 
 (defn render
-  "Renders all occuring links and images."
+  "Renders all occurring links and images."
   [block _]
   (loop [block block
          matches (-> (re-seq #"\!?\[(.*?)\]\((.*?)\)" block)

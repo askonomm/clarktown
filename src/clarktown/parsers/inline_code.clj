@@ -4,7 +4,7 @@
 
 
 (defn render
-  "Renders all occuring inline code."
+  "Renders all occurring inline code."
   [block _]
   (loop [block block
          matches (-> (re-seq #"\`.*?\`" block)

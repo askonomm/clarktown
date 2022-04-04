@@ -82,8 +82,10 @@
   [blocks parsers]
   (for [block blocks]
     (if-let [parser (find-parser-by-block parsers block)]
-      (parse-block-with-known-parser parser parsers block)
-      (parse-block-with-unknown-parsers parsers block))))
+      (->> (string/trim block)
+           (parse-block-with-known-parser parser parsers))
+      (->> (string/trim block)
+           (parse-block-with-unknown-parsers parsers)))))
 
 
 (defn parse

@@ -4,7 +4,7 @@
 
 
 (defn render
-  "Renders all occuring strikethrough text."
+  "Renders all occurring strikethrough text."
   [block _]
   (loop [block block
          matches (-> (re-seq #"~~.*?~~" block)

@@ -4,7 +4,7 @@
 
 
 (defn render
-  "Renders all occuring bold text as bold."
+  "Renders all occurring bold text as bold."
   [block _]
   (loop [block block
          matches (-> (re-seq #"\*\*.*?\*\*" block)

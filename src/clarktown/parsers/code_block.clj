@@ -4,7 +4,7 @@
 
 
 (defn is?
-  "Determines whether or not we're dealing with a code block."
+  "Determines whether we're dealing with a code block."
   [block]
   (and (string/starts-with? block "```")
        (string/ends-with? block "```")))
@@ -23,6 +23,7 @@
                    (string/replace n #"<" "&lt;")
                    (string/replace n #">" "&gt;")
                    (string/replace n #"\n" "<br>")
+                   (string/replace n #"\tab" "<tab>")
                    (string/trim n))]
     (if language
       (str "<pre class=\"language-" language "\"><code>" code "</code></pre>")
