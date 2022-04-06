@@ -7,7 +7,7 @@
   "Determines whether we're dealing with a list block or not."
   [block]
   (->> (string/trim block)
-       (re-matches #"(?s)^(\d\.|\*).*$")))
+       (re-matches #"(?s)^(\d\.\s|\*\s).*$")))
 
 
 (defn string->indent-n
