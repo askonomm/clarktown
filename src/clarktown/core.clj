@@ -25,6 +25,3 @@
    (render markdown parsers/parsers))
   ([markdown given-parsers]
    (parser/parse markdown given-parsers)))
-
-
-(render (slurp "/Users/asko/work/clarktown/test.md"))

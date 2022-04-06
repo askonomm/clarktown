@@ -13,4 +13,6 @@ pom.xml.asc
 .hg/
 .clj-kondo/
 .lsp/
+.idea/
+.calva/
 test.md
