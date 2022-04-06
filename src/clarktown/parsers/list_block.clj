@@ -11,11 +11,16 @@
 
 
 (defn string->indent-n
+  "Returns the indentation count from left of `str`, which must be
+  in spaces and not tabs."
   [str]
   (count (take-while #{\space} str)))
 
 
 (defn compose-items-with-indent-guides
+  "Composes a vector of maps from given `block` that adds a unique
+  ID to each line as well as its `indent-n` which is used later
+  on to determine hierarchies. "
   [block]
   (->> (string/split-lines block)
        (mapv
@@ -27,6 +32,8 @@
 
 
 (defn find-parent-id
+  "Assuming a 1-level `items`, will attempt to find the parent `id`
+  of the item at given `index`. Will return `nil` otherwise."
   [items index]
   (let [indent-n-at-index (:indent-n (nth items index))]
     (-> (->> (split-at index items)
@@ -39,6 +46,9 @@
 
 
 (defn compose-items-with-parents
+  "Composes a 1-level list of items from `block` and adds parent
+  information to each if they belong to another item. The result
+  of this is used to build the final data tree."
   [block]
   (let [items (compose-items-with-indent-guides block)]
     (->> items
@@ -48,6 +58,8 @@
 
 
 (defn add-to-parent
+  "Recursively scans `items`, which can be multiple levels deep,
+  and tries to find a home for `item` according to its parent ID."
   [items item]
   (->> items
        (mapv
@@ -62,6 +74,8 @@
 
 
 (defn compose-item-tree
+  "Given a `block`, composes a data representation of it based on
+  the indentation of each line."
   [block]
   (loop [result []
          items (compose-items-with-parents block)]
@@ -78,6 +92,7 @@
 
 
 (defn render-items
+  "Renders an ordered/un-ordered list hierarchy from given `items`."
   [items]
   (loop [result ""
          inner-items items]
@@ -98,7 +113,7 @@
 
 
 (defn render
-  "Renders the ordered list block"
+  "Renders the list block"
   [block _]
   (-> (compose-item-tree block)
       (render-items)))
