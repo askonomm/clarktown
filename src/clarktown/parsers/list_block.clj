@@ -37,12 +37,12 @@
   [items index]
   (let [indent-n-at-index (:indent-n (nth items index))]
     (-> (->> (split-at index items)
-            first
-            reverse
-            (remove #(or (> (:indent-n %) indent-n-at-index)
-                         (= (:indent-n %) indent-n-at-index)))
-            first
-            :id))))
+             first
+             reverse
+             (remove #(or (> (:indent-n %) indent-n-at-index)
+                          (= (:indent-n %) indent-n-at-index)))
+             first
+             :id))))
 
 
 (defn compose-items-with-parents
