@@ -22,9 +22,7 @@
                    (string/replace n #"&" "&amp;")
                    (string/replace n #"<" "&lt;")
                    (string/replace n #">" "&gt;")
-                   (string/replace n #"\n" "<br>")
-                   (string/replace n #"\tab" "<tab>")
                    (string/trim n))]
     (if language
-      (str "<pre class=\"language-" language "\"><code>" code "</code></pre>")
+      (str "<pre><code class=\"language-" language "\">" code "</code></pre>")
       (str "<pre><code>" code "</code></pre>"))))
