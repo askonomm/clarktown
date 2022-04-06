@@ -1,4 +1,4 @@
-(defproject clarktown "1.0"
+(defproject com.github.askonomm/clarktown "1.0"
   :description "A zero-dependency, pure-clojure Markdown parser."
   :url "https://github.com/askonomm/clarktown"
   :license {:name "MIT"
