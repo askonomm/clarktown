@@ -18,7 +18,7 @@
                       second)
         code (as-> block n
                    (string/replace-first n #"\`\`\`(\w+)?\n" "")
-                   (subs n 0 (- (count n) 5))
+                   (subs n 0 (- (count n) 4))
                    (string/replace n #"&" "&amp;")
                    (string/replace n #"<" "&lt;")
                    (string/replace n #">" "&gt;")
