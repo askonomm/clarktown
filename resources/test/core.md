@@ -50,7 +50,7 @@ function markdownToHTML(markdown) {
 }
 ```
 
-This is ___bold italic text___ and ***this is also***.
+This is ___bold italic text___ and ***this is also***. *What about italic text that **has bold text***?
 
 ## Hi there, world!
 
