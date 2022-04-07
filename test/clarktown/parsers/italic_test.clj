@@ -1,6 +1,7 @@
 (ns clarktown.parsers.italic-test
-  (:require [clojure.test :refer [deftest testing is]]
-            [clarktown.parsers.italic :as italic]))
+  (:require
+    [clojure.test :refer [deftest testing is]]
+    [clarktown.parsers.italic :as italic]))
 
 
 (deftest italic-test

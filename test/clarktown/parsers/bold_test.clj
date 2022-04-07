@@ -1,6 +1,7 @@
 (ns clarktown.parsers.bold-test
-  (:require [clojure.test :refer [deftest testing is]]
-            [clarktown.parsers.bold :as bold]))
+  (:require
+    [clojure.test :refer [deftest testing is]]
+    [clarktown.parsers.bold :as bold]))
 
 
 (deftest bold-test
