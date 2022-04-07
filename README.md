@@ -1,5 +1,7 @@
 # Clarktown
 
+[![Tests](https://github.com/askonomm/clarktown/actions/workflows/tests.yml/badge.svg)](https://github.com/askonomm/clarktown/actions/workflows/tests.yml)
+
 An extensible and modular zero-dependency, pure-Clojure Markdown parser.
 
 ## Installation
