@@ -7,7 +7,7 @@
   "Renders all occurring bold text as bold."
   [block _]
   (loop [block block
-         matches (-> (re-seq #"(\*{2}|\_{2})(.*?)(\*{2}|\_{2})" block)
+         matches (-> (re-seq #"(\*{2}|\_{2})[^\*|\_](.*?)[^\*|\_](\*{2}|\_{2})" block)
                      distinct)]
     (if (empty? matches)
       block

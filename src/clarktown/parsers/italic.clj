@@ -7,7 +7,7 @@
   "Renders all occurring italic text as italic."
   [block _]
   (loop [block block
-         matches (-> (re-seq #"(\*{1}|\_{1})(.*?)(\*{1}|\_{1})" block)
+         matches (-> (re-seq #"(\*{1,}?|\_{1,}?)(.*?)(\*{1,}?|\_{1,}?)" block)
                      distinct)]
     (if (empty? matches)
       block

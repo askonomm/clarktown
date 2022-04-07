@@ -6,5 +6,5 @@
 
 (deftest overall-test
   (testing "Overall"
-    (is (= (slurp "./resources/test/core_result.html")
-           (core/render (slurp "./resources/test/core.md"))))))
+    (is (= (core/render (slurp "./resources/test/core.md"))
+           (slurp "./resources/test/core_result.html")))))
