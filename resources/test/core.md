@@ -69,3 +69,9 @@ This is ___bold italic text___ and ***this is also***. *What about italic text t
       1. Sub sub list item
       2. Continuing sub list item
 * Continuing list item
+
+This is a H1 heading with settext
+=================================
+
+And this is a H2 heading with settext
+-------------------------------------

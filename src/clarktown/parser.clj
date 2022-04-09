@@ -94,4 +94,4 @@
   (let [blocks (-> (string/split markdown #"\n\n")
                    stitch-code-blocks)
         parsed-blocks (parse-blocks blocks parsers)]
-    (string/join "" parsed-blocks)))
+    (string/join "\n\n" parsed-blocks)))

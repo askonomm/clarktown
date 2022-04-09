@@ -1,4 +1,8 @@
-<p>Lorem ipsum dolor <strong>sit</strong> amet. Lorem ipsum <em>dolor</em> <em>sit</em> <strong>amet</strong>.</p><ol><li>List item</li><li>Another list item<ol><li>Sub list item</li><li>Another sub list item<ol><li>Sub sub list item</li></ol></li><li>Continuing sub list item</li></ol></li><li>Continuing list item</li></ol><pre><code class="language-javascript">// Detect horizontal line block
+<p>Lorem ipsum dolor <strong>sit</strong> amet. Lorem ipsum <em>dolor</em> <em>sit</em> <strong>amet</strong>.</p>
+
+<ol><li>List item</li><li>Another list item<ol><li>Sub list item</li><li>Another sub list item<ol><li>Sub sub list item</li></ol></li><li>Continuing sub list item</li></ol></li><li>Continuing list item</li></ol>
+
+<pre><code class="language-javascript">// Detect horizontal line block
 function isHorizontalLineBlock(block) {
   return block === "***";
 }
@@ -36,4 +40,16 @@ function markdownToHTML(markdown) {
 
   // And at last, join the blocks together for one big block.
   return parsedBlocks.join("");
-}</code></pre><p>This is <em><strong>bold italic text</strong></em> and <em><strong>this is also</strong></em>. <em>What about italic text that <strong>has bold text</strong></em>?</p><h2>Hi there, world!</h2><ul><li>List item</li><li>Another list item<ul><li>Sub list item</li><li>Another sub list item<ul><li>Sub sub list item</li><li>Continuing sub list item</li></ul></li></ul></li><li>Continuing list item</li></ul><ul><li>List item</li><li>Another list item<ul><li>Sub list item</li><li>Another sub list item<ol><li>Sub sub list item</li><li>Continuing sub list item</li></ol></li></ul></li><li>Continuing list item</li></ul>
+}</code></pre>
+
+<p>This is <em><strong>bold italic text</strong></em> and <em><strong>this is also</strong></em>. <em>What about italic text that <strong>has bold text</strong></em>?</p>
+
+<h2>Hi there, world!</h2>
+
+<ul><li>List item</li><li>Another list item<ul><li>Sub list item</li><li>Another sub list item<ul><li>Sub sub list item</li><li>Continuing sub list item</li></ul></li></ul></li><li>Continuing list item</li></ul>
+
+<ul><li>List item</li><li>Another list item<ul><li>Sub list item</li><li>Another sub list item<ol><li>Sub sub list item</li><li>Continuing sub list item</li></ol></li></ul></li><li>Continuing list item</li></ul>
+
+<h1>This is a H1 heading with settext</h1>
+
+<h2>And this is a H2 heading with settext</h2>
