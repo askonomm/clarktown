@@ -62,6 +62,8 @@ This is ___bold italic text___ and ***this is also***. *What about italic text t
     * Continuing sub list item
 * Continuing list item
 
+***
+
 * List item
 * Another list item
     * Sub list item
