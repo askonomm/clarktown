@@ -6,5 +6,6 @@
   :deploy-repositories [["releases"  {:sign-releases false :url "https://repo.clojars.org"}]
                         ["snapshots" {:sign-releases false :url "https://repo.clojars.org"}]]
   :dependencies [[org.clojure/clojure "1.11.0"]]
-  :plugins [[lein-auto "0.1.3"]]
+  :plugins [[lein-auto "0.1.3"]
+            [lein-cloverage "1.2.3"]]
   :repl-options {:init-ns clarktown.core})

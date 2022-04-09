@@ -6,6 +6,10 @@
 
 
 (deftest code-block-test
-  (testing "Code block"
+  (testing "Code block with language specification"
     (is (= (slurp (io/file (io/resource "test/parsers/code_block_result.html")))
-           (code-block/render (slurp (io/file (io/resource "test/parsers/code_block.md"))) nil)))))
+           (code-block/render (slurp (io/file (io/resource "test/parsers/code_block.md"))) nil))))
+
+  (testing "Code block with NO language specification"
+    (is (= (slurp (io/file (io/resource "test/parsers/code_block_no_language_result.html")))
+           (code-block/render (slurp (io/file (io/resource "test/parsers/code_block_no_language.md"))) nil)))))
