@@ -55,7 +55,7 @@ This is ___bold italic text___ and ***this is also***. *What about italic text t
 ## Hi there, world!
 
 * List item
-* Another list item 
+* Another list ~~item~~
   * Sub list item
   * Another sub list item 
     * Sub sub list item
