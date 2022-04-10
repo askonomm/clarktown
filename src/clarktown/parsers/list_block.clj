@@ -7,7 +7,7 @@
   "Determines whether we're dealing with a list block or not."
   [block]
   (->> (string/trim block)
-       (re-matches #"(?s)^(\d\.\s|\*{1}\s).*$")))
+       (re-matches #"(?s)^(\d\.\s|\*{1}\s|\-{1}\s).*$")))
 
 
 (defn string->indent-n
@@ -97,13 +97,21 @@
   (loop [result ""
          inner-items items]
     (if (empty? inner-items)
-      (if (string/starts-with? (:value (first items)) "*")
+      (if (or (string/starts-with? (:value (first items)) "*")
+              (string/starts-with? (:value (first items)) "-"))
         (str "<ul>" result "</ul>")
         (str "<ol>" result "</ol>"))
       (let [inner-item (first inner-items)
-            value (if (string/starts-with? (:value inner-item) "*")
+            value (cond
+                    ; * unordered list
+                    (string/starts-with? (:value inner-item) "*")
                     (-> (string/replace-first (:value inner-item) "*" "")
                         string/trim)
+                    ; - unordered list
+                    (string/starts-with? (:value inner-item) "-")
+                    (-> (string/replace-first (:value inner-item) "-" "")
+                        string/trim)
+                    :else
                     (-> (string/replace-first (:value inner-item) #"\d\." "")
                         string/trim))]
         (recur (if (:items inner-item)
