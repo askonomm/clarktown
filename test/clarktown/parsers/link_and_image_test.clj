@@ -9,6 +9,9 @@
     (is (= (link-and-image/render "[This is a link](https://example.com)" nil)
            "<a href=\"https://example.com\">This is a link</a>"))
 
+    (is (= (link-and-image/render "[This-is-a-link](https://example.com)" nil)
+           "<a href=\"https://example.com\">This-is-a-link</a>"))
+
     (is (= (link-and-image/render "[x] [label](link)" nil)
            "[x] <a href=\"link\">label</a>"))
 

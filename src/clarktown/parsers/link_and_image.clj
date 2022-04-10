@@ -13,7 +13,7 @@
   "Renders all occurring links and images."
   [block _]
   (loop [block block
-         matches (-> (re-seq #"\!?\[(\w+( \w+)*)\]\((.*?)\)" block)
+         matches (-> (re-seq #"\!?\[([a-zA-Z0-9\-\.\,]+( [a-zA-Z0-9\-\.\,]+)*)\]\((.*?)\)" block)
                      distinct)]
     (if (empty? matches)
       block
