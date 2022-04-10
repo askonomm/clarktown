@@ -6,8 +6,8 @@
 (defn is?
   "Determines whether the given block is a horizontal line block."
   [block]
-  (-> (string/trim block)
-      (= "***")))
+  (or (= "***" (string/trim block))
+      (= "---" (string/trim block))))
 
 
 (defn render
