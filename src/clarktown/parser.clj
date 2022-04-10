@@ -67,13 +67,14 @@
          parsers (filter #(= nil (:matcher %)) parsers)]
     (if (empty? parsers)
       block
-      (loop [block block
-             renderers (:renderers (first parsers))]
-        (if (empty? renderers)
-          block
-          (let [renderer (first renderers)]
-            (recur (renderer block parsers)
-                   (drop 1 renderers))))))))
+      (recur (loop [block block
+                    renderers (:renderers (first parsers))]
+               (if (empty? renderers)
+                 block
+                 (let [renderer (first renderers)]
+                   (recur (renderer block parsers)
+                          (drop 1 renderers)))))
+             (drop 1 parsers)))))
 
 
 (defn- parse-blocks
