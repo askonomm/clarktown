@@ -20,26 +20,26 @@
    {:matcher horizontal-line-block/is?
     :renderers [horizontal-line-block/render]}
    {:matcher heading-block/is?
-    :renderers [bold/render
+    :renderers [link-and-image/render
+                bold/render
                 italic/render
                 inline-code/render
                 strikethrough/render
-                link-and-image/render
                 heading-block/render]}
    {:matcher quote-block/is?
     :renderers [quote-block/render]}
    {:matcher code-block/is?
     :renderers [code-block/render]}
    {:matcher list-block/is?
-    :renderers [bold/render
+    :renderers [link-and-image/render
+                bold/render
                 italic/render
                 inline-code/render
                 strikethrough/render
-                link-and-image/render
                 list-block/render]}
-   {:renderers [bold/render
+   {:renderers [link-and-image/render
+                bold/render
                 italic/render
                 inline-code/render
                 strikethrough/render
-                link-and-image/render
                 paragraph-block/render]}])

@@ -1,5 +1,7 @@
 Lorem ipsum dolor **sit** amet. Lorem ipsum *dolor* _sit_ __amet__.
 
+There's a [link here](https://example.com/that_has_things?!???!#in-it).
+
 1. List item
 2. Another list item
    1. Sub list item
