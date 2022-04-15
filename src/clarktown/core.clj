@@ -25,3 +25,6 @@
    (render markdown parsers/parsers))
   ([markdown given-parsers]
    (parser/parse markdown given-parsers)))
+
+(comment
+  (render (slurp "./test.md")))

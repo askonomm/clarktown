@@ -35,6 +35,102 @@
                    (drop 1 blocks))))))))
 
 
+(defn- needs-empty-line-above?
+  "Determines whether the current line needs an empty line correction
+  above."
+  [lines line index]
+  (cond
+    ; code block
+    (and (= (string/trim line) "```")
+         (> index 0)
+         (->> (take index lines)
+              (filter #(= (string/trim %) "```"))
+              count
+              odd?)
+         (not (= (-> (nth lines (- index 1))
+                     string/trim) "")))
+    true
+
+    ; ATX heading block
+    (and (string/starts-with? (string/trim line) "#")
+         (> index 0)
+         (not (= (-> (nth lines (- index 1))
+                     string/trim) "")))
+    true
+
+
+    ; everything else stays normal
+    :else false))
+
+
+(defn- needs-empty-line-below?
+  "Determines whether the current line needs an empty line correction
+  below."
+  [lines line index]
+  (cond
+    ; code block
+    (and (= (string/trim line) "```")
+         (< index (- (count lines) 1))
+         (->> (take index lines)
+              (filter #(= (string/trim %) "```"))
+              count
+              even?)
+         (not (= (-> (nth lines (+ index 1))
+                     string/trim) "")))
+    true
+
+    ; ATX heading block
+    (and (string/starts-with? (string/trim line) "#")
+         (< index (- (count lines) 1))
+         (not (= (-> (nth lines (+ index 1))
+                     string/trim) "")))
+    true
+
+    ; everything else stays normal
+    :else false))
+
+
+(defn- correct-block-separations
+  "Corrects block separations and adds newlines above or
+  below a block where needed."
+  [lines]
+  (->> lines
+       (map-indexed
+         (fn [index line]
+           (let [add-line-above? (needs-empty-line-above? lines line index)
+                 add-line-below? (needs-empty-line-below? lines line index)]
+             (cond
+               ; If code block starts but there is no empty newline
+               ; above, let's fix that
+               (and add-line-above?
+                    (not add-line-below?))
+               (str \newline line)
+
+               ; If the code block ends, but there is no empty newline
+               ; below, let's fix that.
+               (and add-line-below?
+                    (not add-line-above?))
+               (str line \newline)
+
+               ; If the code block needs a newline both above and below,
+               ; let's fix that.
+               (and add-line-above?
+                    add-line-below?)
+               (str \newline line \newline)
+
+               ; otherwise is what it is
+               :else line))))))
+
+
+(defn- correct-markdown
+  "Corrects invalid Markdown for the parser."
+  [markdown]
+  (let [lines (string/split-lines markdown)]
+    (->> lines
+         correct-block-separations
+         (string/join \newline))))
+
+
 (defn- find-parser-by-block
   "Find a parser from `parsers` that matches the given `block`."
   [parsers block]
@@ -92,7 +188,8 @@
 (defn parse
   "Parses given `markdown` with `parsers`."
   [markdown parsers]
-  (let [blocks (-> (string/split markdown #"\n\n")
+  (let [blocks (-> (correct-markdown markdown)
+                   (string/split #"\n\n")
                    stitch-code-blocks)
         parsed-blocks (parse-blocks blocks parsers)]
     (string/join "\n\n" parsed-blocks)))

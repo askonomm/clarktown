@@ -84,3 +84,10 @@ This is a H1 heading with settext
 
 And this is a H2 heading with settext
 -------------------------------------
+
+Testing paragraph right before a code block
+```
+code goes here
+```
+# Heading goes here
+Paragraph right after heading

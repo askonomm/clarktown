@@ -16,13 +16,15 @@
   (let [language (->> block
                       (re-find #"\`\`\`(\w+)")
                       second)
-        code (as-> block n
-                   (string/replace-first n #"\`\`\`(\w+)?\n" "")
-                   (subs n 0 (- (count n) 4))
-                   (string/replace n #"&" "&amp;")
-                   (string/replace n #"<" "&lt;")
-                   (string/replace n #">" "&gt;")
-                   (string/trim n))]
+        lines (string/split-lines block)
+        block* (->> (next lines)
+                    (take (- (count lines) 2))
+                    (string/join \newline))
+        code (-> block*
+                 (string/replace #"&" "&amp;")
+                 (string/replace #"<" "&lt;")
+                 (string/replace #">" "&gt;")
+                 string/trim)]
     (if language
       (str "<pre><code class=\"language-" language "\">" code "</code></pre>")
       (str "<pre><code>" code "</code></pre>"))))
