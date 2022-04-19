@@ -1,35 +1,10 @@
-(ns clarktown.parsers.heading-block
+(ns clarktown.renderers.heading-block
   (:require
-    [clojure.string :as string]))
+    [clojure.string :as string]
+    [clarktown.matchers.heading-block :as matcher]))
 
 
-(defn is-hashbang-heading?
-  "Determines whether the given block is a hashbang heading."
-  [block]
-  (-> (string/replace block #"\n" "")
-      string/trim
-      (string/starts-with? "#")))
-
-
-(defn is-settext-heading?
-  "Determines whether the given block is a settext heading."
-  [block]
-  (let [lines (-> (string/split-lines block))
-        chars (-> (last lines)
-                  string/trim
-                  (string/split #""))]
-    (and (> (count lines) 1)
-         (every? #{"-" "="} chars))))
-
-
-(defn is?
-  "Determines whether the given block is a heading block."
-  [block]
-  (or (is-hashbang-heading? block)
-      (is-settext-heading? block)))
-
-
-(defn render-hashbang-heading
+(defn render-atx-heading
   "Renders the hashbang heading block."
   [block]
   (let [single-line-block (-> (string/replace block #"\n" "")
@@ -61,12 +36,9 @@
       (str "<h2>" value "</h2>"))))
 
 
-(render-settext-heading "Hello world\nAnd you too\n===")
-
-
 (defn render
   "Renders the heading block."
   [block _]
-  (if (is-hashbang-heading? block)
-    (render-hashbang-heading block)
+  (if (matcher/is-atx-heading? block)
+    (render-atx-heading block)
     (render-settext-heading block)))

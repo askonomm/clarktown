@@ -1,4 +1,4 @@
-(ns clarktown.parsers.link-and-image
+(ns clarktown.renderers.link-and-image
   (:require
     [clojure.string :as string]))
 

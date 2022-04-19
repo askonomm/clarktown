@@ -1,10 +1,10 @@
-(ns clarktown.parsers.strikethrough-test
+(ns clarktown.renderers.strikethrough-test
   (:require
     [clojure.test :refer [deftest testing is]]
-    [clarktown.parsers.strikethrough :as strikethrough]))
+    [clarktown.renderers.strikethrough :as strikethrough]))
 
 
-(deftest strikethrough-test
+(deftest strikethrough-renderer-test
   (testing "Creating strikethrough text"
     (is (= (strikethrough/render "~~This is strikethrough text.~~" nil)
            "<del>This is strikethrough text.</del>")))

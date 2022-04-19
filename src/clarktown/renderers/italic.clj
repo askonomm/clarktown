@@ -1,4 +1,4 @@
-(ns clarktown.parsers.italic
+(ns clarktown.renderers.italic
   (:require
     [clojure.string :as string]))
 

@@ -1,10 +1,10 @@
-(ns clarktown.parsers.heading-block-test
+(ns clarktown.renderers.heading-block-test
   (:require
     [clojure.test :refer [deftest testing is]]
-    [clarktown.parsers.heading-block :as heading-block]))
+    [clarktown.renderers.heading-block :as heading-block]))
 
 
-(deftest hashbang-heading-test
+(deftest atx-heading-renderer-test
   (testing "Hashbang heading block that's a H1"
     (is (= "<h1>This is a heading block.</h1>"
            (heading-block/render "# This is a heading block." nil))))
@@ -26,7 +26,7 @@
            (heading-block/render "##### This is a heading block." nil)))))
 
 
-(deftest settext-heading-text
+(deftest settext-heading-renderer-text
   (testing "Settext heading block that's a H1"
     (is (= "<h1>This is a heading block.</h1>"
            (heading-block/render "This is a heading block.\n=========" nil))))

@@ -1,15 +1,7 @@
-(ns clarktown.parsers.quote-block
+(ns clarktown.renderers.quote-block
   (:require
     [clojure.string :as string]
     [clarktown.parser :as parser]))
-
-
-(defn is?
-  "Determines whether the given block is a quote block."
-  [block]
-  (-> (string/replace block #"\n" "")
-      string/trim
-      (string/starts-with? ">")))
 
 
 (defn render

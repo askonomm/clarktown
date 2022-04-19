@@ -1,10 +1,10 @@
-(ns clarktown.parsers.inline-code-test
+(ns clarktown.renderers.inline-code-test
   (:require
     [clojure.test :refer [deftest testing is]]
-    [clarktown.parsers.inline-code :as inline-code]))
+    [clarktown.renderers.inline-code :as inline-code]))
 
 
-(deftest inline-code-test
+(deftest inline-code-renderer-test
   (testing "Creating inline code text"
     (is (= "<code>This is inline code.</code>"
            (inline-code/render "`This is inline code.`" nil))))

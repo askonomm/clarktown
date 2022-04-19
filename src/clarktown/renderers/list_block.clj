@@ -1,13 +1,6 @@
-(ns clarktown.parsers.list-block
+(ns clarktown.renderers.list-block
   (:require
     [clojure.string :as string]))
-
-
-(defn is?
-  "Determines whether we're dealing with a list block or not."
-  [block]
-  (->> (string/trim block)
-       (re-matches #"(?s)^(\d\.\s|\*{1}\s|\-{1}\s).*$")))
 
 
 (defn string->indent-n
@@ -111,6 +104,7 @@
                     (string/starts-with? (:value inner-item) "-")
                     (-> (string/replace-first (:value inner-item) "-" "")
                         string/trim)
+                    ; ordered list
                     :else
                     (-> (string/replace-first (:value inner-item) #"\d\." "")
                         string/trim))]

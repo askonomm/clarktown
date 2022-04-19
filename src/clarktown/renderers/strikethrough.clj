@@ -1,18 +1,18 @@
-(ns clarktown.parsers.bold
+(ns clarktown.renderers.strikethrough
   (:require
     [clojure.string :as string]))
 
 
 (defn render
-  "Renders all occurring bold text as bold."
+  "Renders all occurring strikethrough text."
   [block _]
   (loop [block block
-         matches (-> (re-seq #"(\*{2}|\_{2})[^\*|\_](.*?)[^\*|\_](\*{2}|\_{2})" block)
+         matches (-> (re-seq #"~~.*?~~" block)
                      distinct)]
     (if (empty? matches)
       block
-      (let [match (ffirst matches)
+      (let [match (first matches)
             value (subs match 2 (- (count match) 2))
-            replacement (str "<strong>" value "</strong>")]
+            replacement (str "<del>" value "</del>")]
         (recur (string/replace block match replacement)
                (drop 1 matches))))))

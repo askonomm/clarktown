@@ -1,10 +1,10 @@
-(ns clarktown.parsers.italic-test
+(ns clarktown.renderers.italic-test
   (:require
     [clojure.test :refer [deftest testing is]]
-    [clarktown.parsers.italic :as italic]))
+    [clarktown.renderers.italic :as italic]))
 
 
-(deftest italic-test
+(deftest italic-renderer-test
   (testing "Creating italic text with one surrounding asterisk character"
     (is (= "<em>This is italic.</em>"
            (italic/render "*This is italic.*" nil))))

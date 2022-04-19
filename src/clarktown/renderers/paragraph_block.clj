@@ -1,4 +1,4 @@
-(ns clarktown.parsers.paragraph-block
+(ns clarktown.renderers.paragraph-block
   (:require
     [clojure.string :as string]))
 

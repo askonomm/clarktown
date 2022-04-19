@@ -1,10 +1,10 @@
-(ns clarktown.parsers.bold-test
+(ns clarktown.renderers.bold-test
   (:require
     [clojure.test :refer [deftest testing is]]
-    [clarktown.parsers.bold :as bold]))
+    [clarktown.renderers.bold :as bold]))
 
 
-(deftest bold-test
+(deftest bold-renderer-test
   (testing "Creating bold text with two surrounding asterisk characters"
     (is (= "<strong>This is bold.</strong>"
            (bold/render "**This is bold.**" nil))))

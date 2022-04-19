@@ -1,4 +1,4 @@
-(ns clarktown.parsers.inline-code
+(ns clarktown.renderers.inline-code
   (:require
     [clojure.string :as string]))
 

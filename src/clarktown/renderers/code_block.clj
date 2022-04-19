@@ -1,13 +1,6 @@
-(ns clarktown.parsers.code-block
+(ns clarktown.renderers.code-block
   (:require
     [clojure.string :as string]))
-
-
-(defn is?
-  "Determines whether we're dealing with a code block."
-  [block]
-  (and (string/starts-with? block "```")
-       (string/ends-with? block "```")))
 
 
 (defn render
