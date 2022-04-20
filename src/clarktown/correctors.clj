@@ -4,7 +4,7 @@
     [clarktown.correctors.atx-heading-block :as atx-heading-block]))
 
 
-(def block-separation-correctors
+(def default-block-separation-correctors
   {:empty-line-above?
    [code-block/empty-line-above?
     atx-heading-block/empty-line-above?]
@@ -14,4 +14,4 @@
 
 
 (def default-correctors
-  {:block-separations block-separation-correctors})
+  {:block-separations default-block-separation-correctors})
