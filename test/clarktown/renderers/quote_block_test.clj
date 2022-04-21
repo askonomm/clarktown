@@ -6,5 +6,5 @@
 
 (deftest quote-block-block-renderer-test
   (testing "Creating a quote block line"
-    (is (= (quote-block/render "> First line\n> second line" nil)
+    (is (= (quote-block/render "> First line\n> second line" nil nil)
            "<blockquote>First line\nsecond line</blockquote>"))))

@@ -6,5 +6,5 @@
 
 (deftest empty-block-renderer-test
   (testing "Rendering an empty block"
-    (is (= (empty-block/render "" nil)
+    (is (= (empty-block/render "" nil nil)
            ""))))

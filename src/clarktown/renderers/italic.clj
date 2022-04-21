@@ -5,7 +5,7 @@
 
 (defn render
   "Renders all occurring italic text as italic."
-  [block _]
+  [block _ _]
   (loop [block block
          matches (-> (re-seq #"(\*{1,}?|\_{1,}?)(.*?)(\*{1,}?|\_{1,}?)" block)
                      distinct)]

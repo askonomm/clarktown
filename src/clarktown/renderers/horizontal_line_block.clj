@@ -3,5 +3,5 @@
 
 (defn render
   "Renders the horizontal line block."
-  [_ _]
+  [_ _ _]
   "<hr>")

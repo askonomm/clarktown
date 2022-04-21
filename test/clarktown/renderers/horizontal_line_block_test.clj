@@ -6,8 +6,8 @@
 
 (deftest horizontal-line-block-renderer-test
   (testing "Creating a horizontal line"
-    (is (= (horizontal-line-block/render "***" nil)
+    (is (= (horizontal-line-block/render "***" nil nil)
            "<hr>"))
 
-    (is (= (horizontal-line-block/render "---" nil)
+    (is (= (horizontal-line-block/render "---" nil nil)
            "<hr>"))))

@@ -5,7 +5,7 @@
 
 (defn render
   "Renders the code block."
-  [block _]
+  [block _ _]
   (let [language (->> block
                       (re-find #"\`\`\`(\w+)")
                       second)

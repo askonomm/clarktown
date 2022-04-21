@@ -116,6 +116,6 @@
 
 (defn render
   "Renders the list block"
-  [block _]
+  [block _ _]
   (-> (compose-item-tree block)
       (render-items)))

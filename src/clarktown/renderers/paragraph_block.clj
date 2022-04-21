@@ -5,5 +5,5 @@
 
 (defn render
   "Renders the paragraph block."
-  [block _]
+  [block _ _]
   (str "<p>" (string/trim block) "</p>"))

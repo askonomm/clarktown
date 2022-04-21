@@ -38,7 +38,7 @@
 
 (defn render
   "Renders the heading block."
-  [block _]
+  [block _ _]
   (if (matcher/is-atx-heading? block)
     (render-atx-heading block)
     (render-settext-heading block)))

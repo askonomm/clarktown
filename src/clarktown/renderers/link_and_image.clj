@@ -11,7 +11,7 @@
 
 (defn render
   "Renders all occurring links and images."
-  [block _]
+  [block _ _]
   (loop [block block
          matches (-> (re-seq #"\!?\[([a-zA-Z0-9\-\.\,]+( [a-zA-Z0-9\-\.\,]+)*)\]\((.*?)\)" block)
                      distinct)]
