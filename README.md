@@ -35,7 +35,7 @@ At its core, Clarktown is nothing more than a collection of parsers that collect
 - `strikethrough`
 
 So whenever you call `clarktown.core/render`, those parsers are applied to the content you give it, and are defined collectively in 
-`clarktown.parsers/parsers`. If you want to remove certain parsers feel free to duplicate that vector with whatever combination of 
+`clarktown.renderers/parsers`. If you want to remove certain parsers feel free to duplicate that vector with whatever combination of 
 parsers that works best for you, and pass it as the second parameter to the `clarktown.core/render` function, like so:
 
 ```clojure
@@ -45,7 +45,7 @@ parsers that works best for you, and pass it as the second parameter to the `cla
 ## Create your own parsers
 
 As Clarktown is modular, you can easily create your own custom parsers as well. To see how the parsers are made, I really recommend 
-checking any of the existing parsers you can find in the `clarktown.parsers/*` namespaces and how they are used in the `clarktown.parsers/parsers` variable, 
+checking any of the existing parsers you can find in the `clarktown.renderers/*` namespaces and how they are used in the `clarktown.renderers/parsers` variable, 
 but overall the idea is very simple: there are (potential) matchers, and renderers.
 
 However, before we get into matchers and renderers, let me quickly explain how Clarktown does its thing. Clarktown splits the entire Markdown 
@@ -112,7 +112,7 @@ vector of maps, each map representing one collection. And so to register you cou
 (ns myapp.core
   (:require 
     [clarktown.core :as clarktown]
-    [clarktown.parsers :refer [parsers]]))
+    [clarktown.renderers :refer [parsers]]))
 
 (def my-parser
   {:matcher heading-block/is?

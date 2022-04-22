@@ -1,45 +1,95 @@
 (ns clarktown.parsers
   (:require
-    [clarktown.parsers.bold :as bold]
-    [clarktown.parsers.italic :as italic]
-    [clarktown.parsers.inline-code :as inline-code]
-    [clarktown.parsers.strikethrough :as strikethrough]
-    [clarktown.parsers.link-and-image :as link-and-image]
-    [clarktown.parsers.empty-block :as empty-block]
-    [clarktown.parsers.horizontal-line-block :as horizontal-line-block]
-    [clarktown.parsers.quote-block :as quote-block]
-    [clarktown.parsers.heading-block :as heading-block]
-    [clarktown.parsers.code-block :as code-block]
-    [clarktown.parsers.list-block :as list-block]
-    [clarktown.parsers.paragraph-block :as paragraph-block]))
+    [clarktown.matchers.empty-block]
+    [clarktown.renderers.empty-block]
+    [clarktown.matchers.horizontal-line-block]
+    [clarktown.renderers.horizontal-line-block]
+    [clarktown.matchers.heading-block]
+    [clarktown.renderers.heading-block]
+    [clarktown.matchers.quote-block]
+    [clarktown.renderers.quote-block]
+    [clarktown.matchers.code-block]
+    [clarktown.renderers.code-block]
+    [clarktown.matchers.list-block]
+    [clarktown.renderers.list-block]
+    [clarktown.renderers.paragraph-block]
+    [clarktown.renderers.link-and-image]
+    [clarktown.renderers.bold]
+    [clarktown.renderers.italic]
+    [clarktown.renderers.inline-code]
+    [clarktown.renderers.strikethrough]))
 
 
-(def parsers
-  [{:matcher empty-block/is?
-    :renderers [empty-block/render]}
-   {:matcher horizontal-line-block/is?
-    :renderers [horizontal-line-block/render]}
-   {:matcher heading-block/is?
-    :renderers [link-and-image/render
-                bold/render
-                italic/render
-                inline-code/render
-                strikethrough/render
-                heading-block/render]}
-   {:matcher quote-block/is?
-    :renderers [quote-block/render]}
-   {:matcher code-block/is?
-    :renderers [code-block/render]}
-   {:matcher list-block/is?
-    :renderers [link-and-image/render
-                bold/render
-                italic/render
-                inline-code/render
-                strikethrough/render
-                list-block/render]}
-   {:renderers [link-and-image/render
-                bold/render
-                italic/render
-                inline-code/render
-                strikethrough/render
-                paragraph-block/render]}])
+(def
+  ^{:doc "Detects, parses and renders a empty block."}
+  empty-block-parser
+  {:matcher clarktown.matchers.empty-block/match?
+   :renderers [clarktown.renderers.empty-block/render]})
+
+
+(def
+  ^{:doc "Detects, parses and renders a horizontal line block."}
+  horizontal-line-block-parser
+  {:matcher clarktown.matchers.horizontal-line-block/match?
+   :renderers [clarktown.renderers.horizontal-line-block/render]})
+
+
+(def
+  ^{:doc "Detects, parses and renders a heading block."}
+  heading-block-parser
+  {:matcher clarktown.matchers.heading-block/match?
+   :renderers [clarktown.renderers.link-and-image/render
+               clarktown.renderers.bold/render
+               clarktown.renderers.italic/render
+               clarktown.renderers.inline-code/render
+               clarktown.renderers.strikethrough/render
+               clarktown.renderers.heading-block/render]})
+
+
+(def
+  ^{:doc "Detects, parses and renders a quote block."}
+  quote-block-parser
+  {:matcher clarktown.matchers.quote-block/match?
+   :renderers [clarktown.renderers.quote-block/render]})
+
+
+(def
+  ^{:doc "Detects, parses and renders a code block."}
+  code-block-parser
+  {:matcher clarktown.matchers.code-block/match?
+   :renderers [clarktown.renderers.code-block/render]})
+
+
+(def
+  ^{:doc "Detects, parses and renders a list block."}
+  list-block-parser
+  {:matcher clarktown.matchers.list-block/match?
+   :renderers [clarktown.renderers.link-and-image/render
+               clarktown.renderers.bold/render
+               clarktown.renderers.italic/render
+               clarktown.renderers.inline-code/render
+               clarktown.renderers.strikethrough/render
+               clarktown.renderers.list-block/render]})
+
+
+(def
+  ^{:doc "Parses and renders a quote block."}
+  paragraph-block-parser
+  {:renderers [clarktown.renderers.link-and-image/render
+               clarktown.renderers.bold/render
+               clarktown.renderers.italic/render
+               clarktown.renderers.inline-code/render
+               clarktown.renderers.strikethrough/render
+               clarktown.renderers.paragraph-block/render]})
+
+
+(def
+  ^{:doc "A set of default parsers."}
+  default-parsers
+  [empty-block-parser
+   horizontal-line-block-parser
+   heading-block-parser
+   quote-block-parser
+   code-block-parser
+   list-block-parser
+   paragraph-block-parser])

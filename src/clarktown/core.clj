@@ -1,7 +1,8 @@
 (ns clarktown.core
   (:require
-    [clarktown.parser :as parser]
-    [clarktown.parsers :as parsers]))
+    [clarktown.engine :as engine]
+    [clarktown.parsers :as parsers]
+    [clarktown.correctors :as correctors]))
 
 
 (defn render
@@ -17,14 +18,13 @@
   argument, which is a given Markdown block.
 
   An example parser:
-  ```
+  ```clojure
   {:matcher (fn [block] ...)
    :renderers [(fn [block] ...) (fn [block] ...)]}
   ```"
   ([markdown]
-   (render markdown parsers/parsers))
+   (render markdown parsers/default-parsers))
   ([markdown given-parsers]
-   (parser/parse markdown given-parsers)))
-
-(comment
-  (render (slurp "./test.md")))
+   (render markdown given-parsers correctors/default-correctors))
+  ([markdown given-parsers given-correctors]
+   (engine/render markdown given-parsers given-correctors)))
