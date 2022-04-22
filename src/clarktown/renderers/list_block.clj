@@ -20,8 +20,7 @@
          (fn [line]
            {:id (random-uuid)
             :indent-n (string->indent-n line)
-            :value (-> line
-                       string/trim)}))))
+            :value (string/trim line)}))))
 
 
 (defn find-parent-id
@@ -57,8 +56,7 @@
   (->> items
        (mapv
          (fn [i]
-           (let [new-item {:id (:id item)
-                           :value (:value item)}]
+           (let [new-item (select-keys item [:id :value])]
             (if (= (:id i) (:parent item))
               (if (:items i)
                 (assoc i :items (concat (:items i) [new-item]))
@@ -78,8 +76,7 @@
       result
       (let [item (first items)
             parent (:parent item)
-            new-item {:id (:id item)
-                      :value (:value item)}]
+            new-item (select-keys item [:id :value])]
         (recur (if parent
                  (add-to-parent result item)
                  (concat result [new-item]))
