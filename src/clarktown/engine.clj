@@ -39,32 +39,34 @@
   "Corrects block separations and adds newlines above or
   below a block where needed."
   [correctors lines]
-  (->> lines
-       (map-indexed
-         (fn [index line]
-           (let [add-line-above? (some #(true? (% lines line index)) (:empty-line-above? correctors))
-                 add-line-below? (some #(true? (% lines line index)) (:empty-line-below? correctors))]
-             (cond
-               ; If code block starts but there is no empty newline
-               ; above, let's fix that
-               (and add-line-above?
-                    (not add-line-below?))
-               (str \newline line)
+  (let [above-correctors (:empty-line-above? correctors)
+        below-correctors (:empty-line-below? correctors)]
+    (map-indexed
+      (fn [index line]
+        (let [add-line-above? (some #(true? (% lines line index)) above-correctors)
+              add-line-below? (some #(true? (% lines line index)) below-correctors)]
+          (cond
+            ; If code block starts but there is no empty newline
+            ; above, let's fix that
+            (and add-line-above?
+                 (not add-line-below?))
+            (str \newline line)
 
-               ; If the code block ends, but there is no empty newline
-               ; below, let's fix that.
-               (and add-line-below?
-                    (not add-line-above?))
-               (str line \newline)
+            ; If the code block ends, but there is no empty newline
+            ; below, let's fix that.
+            (and add-line-below?
+                 (not add-line-above?))
+            (str line \newline)
 
-               ; If the code block needs a newline both above and below,
-               ; let's fix that.
-               (and add-line-above?
-                    add-line-below?)
-               (str \newline line \newline)
+            ; If the code block needs a newline both above and below,
+            ; let's fix that.
+            (and add-line-above?
+                 add-line-below?)
+            (str \newline line \newline)
 
-               ; otherwise is what it is
-               :else line))))))
+            ; otherwise is what it is
+            :else line)))
+      lines)))
 
 
 (defn- correct-markdown
