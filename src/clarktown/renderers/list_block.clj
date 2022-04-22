@@ -57,13 +57,15 @@
   (->> items
        (mapv
          (fn [i]
-           (if (= (:id i) (:parent item))
-             (if (:items i)
-               (assoc i :items (concat (:items i) [item]))
-               (assoc i :items [item]))
-             (if (:items i)
-               (assoc i :items (add-to-parent (:items i) item))
-               i))))))
+           (let [new-item {:id (:id item)
+                           :value (:value item)}]
+            (if (= (:id i) (:parent item))
+              (if (:items i)
+                (assoc i :items (concat (:items i) [new-item]))
+                (assoc i :items [new-item]))
+              (if (:items i)
+                (assoc i :items (add-to-parent (:items i) item))
+                i)))))))
 
 
 (defn compose-item-tree
