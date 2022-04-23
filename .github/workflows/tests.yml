@@ -28,4 +28,4 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: "Run tests"
-        run: bin/kaocha
+        run: lein kaocha
