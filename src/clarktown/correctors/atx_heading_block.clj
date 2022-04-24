@@ -3,6 +3,15 @@
     [clojure.string :as string]))
 
 
+(defn- in-code-block?
+  "Determines whether the current `line` is within a code block."
+  [lines index]
+  (->> (take index lines)
+       (filter #(string/starts-with? (string/trim %) "```"))
+       count
+       odd?))
+
+
 (defn empty-line-above?
   "Determines whether there's a need for an empty new line 
   above the `line` at the current `index`. In the case of a 
@@ -13,8 +22,9 @@
   (and (string/starts-with? (string/trim line) "#")
        (> index 0)
        (not (= (-> (nth lines (- index 1))
-                   string/trim) ""))))
-
+                   string/trim) ""))
+       (not (in-code-block? lines index))))     
+       
 
 (defn empty-line-below?
   "Determines whether there's a need for an empty new line
@@ -26,4 +36,5 @@
   (and (string/starts-with? (string/trim line) "#")
        (< index (- (count lines) 1))
        (not (= (-> (nth lines (+ index 1))
-                   string/trim) ""))))
+                   string/trim) ""))
+       (not (in-code-block? lines index))))
