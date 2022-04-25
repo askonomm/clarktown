@@ -6,7 +6,17 @@ An extensible and modular zero-dependency, pure-Clojure Markdown parser.
 
 ## Installation
 
-[![Clojars Project](https://img.shields.io/clojars/v/com.github.askonomm/clarktown.svg)](https://clojars.org/com.github.askonomm/clarktown)
+#### Leiningen/Boot
+
+```
+[com.github.askonomm/clarktown "1.1.2"]
+```
+
+#### Clojure CLI/deps.edn
+
+```
+com.github.askonomm/clarktown {:mvn/version "1.1.2"}
+```
 
 ## Basic usage example
 
