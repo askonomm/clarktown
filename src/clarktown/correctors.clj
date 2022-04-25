@@ -7,10 +7,10 @@
 (def
   ^{:doc "The default block separation correctors."}
   default-block-separation-correctors
-  {:empty-line-above?
+  {:newline-above
    [code-block/empty-line-above?
     atx-heading-block/empty-line-above?]
-   :empty-line-below?
+   :newline-below
    [code-block/empty-line-below?
     atx-heading-block/empty-line-below?]})
 

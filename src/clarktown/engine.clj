@@ -39,29 +39,29 @@
   "Corrects block separations and adds newlines above or
   below a block where needed."
   [correctors lines]
-  (let [above-correctors (:empty-line-above? correctors)
-        below-correctors (:empty-line-below? correctors)]
+  (let [above-correctors (:newline-above correctors)
+        below-correctors (:newline-below correctors)]
     (map-indexed
       (fn [index line]
-        (let [add-line-above? (some #(true? (% lines line index)) above-correctors)
-              add-line-below? (some #(true? (% lines line index)) below-correctors)]
+        (let [add-newline-above? (some #(true? (% lines line index)) above-correctors)
+              add-newline-below? (some #(true? (% lines line index)) below-correctors)]
           (cond
             ; If code block starts but there is no empty newline
             ; above, let's fix that
-            (and add-line-above?
-                 (not add-line-below?))
+            (and add-newline-above?
+                 (not add-newline-below?))
             (str \newline line)
 
             ; If the code block ends, but there is no empty newline
             ; below, let's fix that.
-            (and add-line-below?
-                 (not add-line-above?))
+            (and add-newline-below?
+                 (not add-newline-above?))
             (str line \newline)
 
             ; If the code block needs a newline both above and below,
             ; let's fix that.
-            (and add-line-above?
-                 add-line-below?)
+            (and add-newline-above?
+                 add-newline-below?)
             (str \newline line \newline)
 
             ; otherwise is what it is
