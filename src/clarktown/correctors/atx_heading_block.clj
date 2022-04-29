@@ -19,7 +19,7 @@
   there's no empty newline above, we need to create one, and 
   so this function must then return `true`."
   [lines line index]
-  (and (string/starts-with? (string/trim line) "#")
+  (and (is-atx-heading? line)
        (> index 0)
        (not (= (-> (nth lines (- index 1))
                    string/trim) ""))
@@ -33,7 +33,7 @@
   there's no empty newline below, we need to create one, and
   so this function must then return `true`."
   [lines line index]
-  (and (string/starts-with? (string/trim line) "#")
+  (and (is-atx-heading? line)
        (< index (- (count lines) 1))
        (not (= (-> (nth lines (+ index 1))
                    string/trim) ""))
