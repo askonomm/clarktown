@@ -35,7 +35,20 @@
   
   (testing "No H tag when there is no space between # characters and value"
     (is (= "#This is not a heading block."
-           (heading-block/render "#This is not a heading block." nil nil)))))
+           (heading-block/render "#This is not a heading block." nil nil))))
+  
+  (testing "ATX heading can precede up to 3 spaces"
+    (is (= "<h1>This is a heading.</h1>"
+           (heading-block/render " # This is a heading." nil nil)))
+    (is (= "<h1>This is a heading.</h1>"
+           (heading-block/render "  # This is a heading." nil nil)))
+    (is (= "<h1>This is a heading.</h1>"
+           (heading-block/render "   # This is a heading." nil nil))))
+  
+  (testing "But no more than 3 spaces"
+    (is (= "    # This is a heading."
+           (heading-block/render "    # This is a heading." nil nil)))))    
+    
 
 
 (deftest settext-heading-renderer-text
