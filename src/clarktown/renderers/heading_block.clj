@@ -7,8 +7,7 @@
 (defn render-atx-heading
   "Renders the hashbang heading block."
   [block]
-  (let [single-line-block (-> (string/replace block #"\n" "")
-                              string/trim)
+  (let [single-line-block (string/trim block)
         size (-> (string/split single-line-block #" ")
                  first
                  string/trim
@@ -39,6 +38,10 @@
 (defn render
   "Renders the heading block."
   [block _ _]
-  (if (matcher/is-atx-heading? block)
-    (render-atx-heading block)
-    (render-settext-heading block)))
+  (cond (matcher/is-atx-heading? block)
+        (render-atx-heading block)
+        
+        (matcher/is-settext-heading? block)
+        (render-settext-heading block)
+        
+        :else block))
