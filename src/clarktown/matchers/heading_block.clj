@@ -6,9 +6,7 @@
 (defn is-atx-heading?
   "Determines whether the given block is a atx heading."
   [block]
-  (-> (string/replace block #"\n" "")
-      string/trim
-      (string/starts-with? "#")))
+  (re-matches #"^\#{1,6}\s.*" block))
 
 
 (defn is-settext-heading?

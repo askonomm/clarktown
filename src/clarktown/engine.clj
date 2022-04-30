@@ -69,13 +69,20 @@
       lines)))
 
 
+(defn- remove-excess-newlines
+  "Replaces all occurences of 3 or more concecutive newlines into
+  two newlines."
+  [markdown]
+  (string/replace markdown #"\n{3,}" "\n\n"))
+
+
 (defn- correct-markdown
   "Corrects invalid Markdown for the parser."
   [markdown given-correctors]
-  (let [lines (string/split-lines markdown)]
-    (->> lines
-         (correct-block-separations (:block-separations given-correctors))
-         (string/join \newline))))
+  (->> (string/split-lines markdown)
+       (correct-block-separations (:block-separations given-correctors))
+       (string/join \newline)
+       (remove-excess-newlines)))
 
 
 (defn- find-parser-by-block
