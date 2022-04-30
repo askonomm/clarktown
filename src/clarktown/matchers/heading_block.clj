@@ -6,7 +6,7 @@
 (defn is-atx-heading?
   "Determines whether the given block is a atx heading."
   [block]
-  (re-matches #"^\#{1,6}\s.*" block))
+  (re-matches #"^\s{0,3}?\#{1,6}\s.*" block))
 
 
 (defn is-settext-heading?
