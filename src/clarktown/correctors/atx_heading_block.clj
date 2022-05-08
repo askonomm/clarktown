@@ -13,7 +13,7 @@
        odd?))
 
 
-(defn empty-line-above?
+(defn newline-above?
   "Determines whether there's a need for an empty new line 
   above the `line` at the current `index`. In the case of a 
   ATX heading block that starts with the `#` character, if 
@@ -27,7 +27,7 @@
        (not (in-code-block? lines index))))
 
 
-(defn empty-line-below?
+(defn newline-below?
   "Determines whether there's a need for an empty new line
   below the `line` at the current `index`. In the case of a 
   ATX heading block that starts with the `#` character, if

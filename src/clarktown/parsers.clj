@@ -8,8 +8,8 @@
     [clarktown.renderers.heading-block]
     [clarktown.matchers.quote-block]
     [clarktown.renderers.quote-block]
-    [clarktown.matchers.code-block]
-    [clarktown.renderers.code-block]
+    [clarktown.matchers.fenced-code-block]
+    [clarktown.renderers.fenced-code-block]
     [clarktown.matchers.list-block]
     [clarktown.renderers.list-block]
     [clarktown.renderers.paragraph-block]
@@ -54,10 +54,10 @@
 
 
 (def
-  ^{:doc "Detects, parses and renders a code block."}
-  code-block-parser
-  {:matcher clarktown.matchers.code-block/match?
-   :renderers [clarktown.renderers.code-block/render]})
+  ^{:doc "Detects, parses and renders a fenced code block."}
+  fenced-code-block-parser
+  {:matcher clarktown.matchers.fenced-code-block/match?
+   :renderers [clarktown.renderers.fenced-code-block/render]})
 
 
 (def
@@ -90,6 +90,6 @@
    horizontal-line-block-parser
    heading-block-parser
    quote-block-parser
-   code-block-parser
+   fenced-code-block-parser
    list-block-parser
    paragraph-block-parser])

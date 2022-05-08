@@ -3,7 +3,7 @@
     [clojure.string :as string]))
 
 
-(defn- stitch-code-blocks
+(defn- stitch-fenced-code-blocks
   "Since code blocks can span multiple blocks (a block is separated by
   two line breaks from another block) , we need to stitch them together
   into one block in order for a block parser to be able to do anything
@@ -144,6 +144,6 @@
   [markdown given-parsers given-correctors]
   (let [blocks (-> (correct-markdown markdown given-correctors)
                    (string/split #"\n\n")
-                   stitch-code-blocks)
+                   stitch-fenced-code-blocks)
         parsed-blocks (parse-blocks blocks given-parsers given-correctors)]
     (string/join "\n\n" parsed-blocks)))

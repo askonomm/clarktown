@@ -4,7 +4,7 @@
     [clarktown.matchers.quote-block :as quote-block]))
 
 
-(deftest quote-block-block-matcher-test
+(deftest quote-block-matcher-test
   (testing "Checking a quote block"
     (is (true? (quote-block/match? "> Test")))
     (is (true? (quote-block/match? "    > Test")))

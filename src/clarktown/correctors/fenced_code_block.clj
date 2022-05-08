@@ -1,9 +1,9 @@
-(ns clarktown.correctors.code-block
+(ns clarktown.correctors.fenced-code-block
   (:require
     [clojure.string :as string]))
 
 
-(defn empty-line-above?
+(defn newline-above?
   "Determines whether there's a need for an empty new line
   above the `line` at the current `index`. In the case of a 
   code block, which starts with three backticks (```), if there's
@@ -20,7 +20,7 @@
                    string/trim) ""))))
 
 
-(defn empty-line-below?
+(defn newline-below?
   "Determines whether there's a need for an empty new line
   below the `line` at the current `index`. In the case of a 
   code block, which ends with three backticks (```), if there's

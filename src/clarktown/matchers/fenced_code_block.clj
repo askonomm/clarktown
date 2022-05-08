@@ -1,4 +1,4 @@
-(ns clarktown.matchers.code-block
+(ns clarktown.matchers.fenced-code-block
   (:require
     [clojure.string :as string]))
 

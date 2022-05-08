@@ -4,7 +4,7 @@
     [clarktown.matchers.list-block :as matcher]))
 
 
-(defn empty-line-above?
+(defn newline-above?
   "Determines whether there's a need for an empty new line
   above the `line` at the current `index`. In the list block 
   case that's when the above line is not a newline and is not
@@ -20,7 +20,7 @@
                "")))) 
  
                
-(defn empty-line-below?
+(defn newline-below?
   "Determines whether there's a need for an empty new line
   above the `line` at the current `index`. In the list block 
   case that's when the below line is not a newline and is not
