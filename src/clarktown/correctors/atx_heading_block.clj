@@ -20,7 +20,7 @@
   there's no empty newline above, we need to create one, and 
   so this function must then return `true`."
   [lines line index]
-  (and (is-atx-heading? (string/trim line))
+  (and (is-atx-heading? line)
        (> index 0)
        (not (= (-> (nth lines (- index 1))
                    string/trim) ""))

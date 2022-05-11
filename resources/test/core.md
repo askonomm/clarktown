@@ -68,7 +68,9 @@ This is ___bold italic text___ and ***this is also***. *What about italic text t
     * Sub sub list item
     * Continuing sub list item
 * Continuing list item
-
+    <?php
+    echo 'indented code block';
+    ?>
 ***
 
 * List item
@@ -86,6 +88,10 @@ code goes here.
 
 This is a H1 heading with settext
 =================================
+
+    <?php
+    echo 'indented code block';
+    ?>
 
 And this is a H2 heading with settext
 -------------------------------------

@@ -10,6 +10,8 @@
     [clarktown.renderers.quote-block]
     [clarktown.matchers.fenced-code-block]
     [clarktown.renderers.fenced-code-block]
+    [clarktown.matchers.indented-code-block]
+    [clarktown.renderers.indented-code-block]
     [clarktown.matchers.list-block]
     [clarktown.renderers.list-block]
     [clarktown.renderers.paragraph-block]
@@ -61,6 +63,13 @@
 
 
 (def
+  ^{:doc "Detects, parses and renders a indented code block."}
+  indented-code-block-parser
+  {:matcher clarktown.matchers.indented-code-block/match?
+   :renderers [clarktown.renderers.indented-code-block/render]})
+
+
+(def
   ^{:doc "Detects, parses and renders a list block."}
   list-block-parser
   {:matcher clarktown.matchers.list-block/match?
@@ -91,5 +100,6 @@
    heading-block-parser
    quote-block-parser
    fenced-code-block-parser
+   indented-code-block-parser
    list-block-parser
    paragraph-block-parser])

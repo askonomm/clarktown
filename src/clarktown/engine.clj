@@ -70,7 +70,7 @@
 
 
 (defn- remove-excess-newlines
-  "Replaces all occurences of 3 or more concecutive newlines into
+  "Replaces all occurrences of 3 or more consecutive newlines into
   two newlines."
   [markdown]
   (string/replace markdown #"\n{3,}" "\n\n"))
@@ -133,10 +133,8 @@
   [blocks given-parsers given-correctors]
   (for [block blocks]
     (if-let [parser (find-parser-by-block given-parsers block)]
-      (->> (string/trim block)
-           (parse-block-with-known-parser parser given-parsers given-correctors))
-      (->> (string/trim block)
-           (parse-block-with-unknown-parsers given-parsers given-correctors)))))
+      (parse-block-with-known-parser parser given-parsers given-correctors block)
+      (parse-block-with-unknown-parsers given-parsers given-correctors block))))
 
 
 (defn render
