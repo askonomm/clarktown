@@ -1,8 +1,22 @@
 (ns clarktown.renderers.heading-block
   (:require
     [clojure.string :as string]
-    [clarktown.matchers.heading-block :as matcher]))
+    [clarktown.matchers.heading-block :as matcher])
+  (:import
+    (java.text Normalizer Normalizer$Form)))
 
+
+(defn- slugify
+  "Turn `input` in a URL slug."
+  [input]
+  (let [split-s(-> (Normalizer/normalize input Normalizer$Form/NFD)
+                   (string/replace #"[\P{ASCII}]+" "")
+                   string/lower-case
+                   string/triml
+                   (string/split #"[\p{Space}\p{P}]+"))
+        combined (string/join "-" split-s)]
+    (apply str (take 250 combined))))
+  
 
 (defn render-atx-heading
   "Renders the hashbang heading block."
@@ -15,8 +29,9 @@
         value (->> (string/split single-line-block #" ")
                    next
                    (string/join " ")
-                   string/trim)]
-    (str "<h" size ">" value "</h" size ">")))
+                   string/trim)
+        id (slugify value)]
+    (str "<h" size " id=\"" id "\">" value "</h" size ">")))
 
 
 (defn render-settext-heading
@@ -29,10 +44,11 @@
         h1? (= "=" (-> (last lines)
                        string/trim
                        (string/split #"")
-                       first))]
+                       first))
+        id (slugify value)]
     (if h1?
-      (str "<h1>" value "</h1>")
-      (str "<h2>" value "</h2>"))))
+      (str "<h1 id=\"" id "\">" value "</h1>")
+      (str "<h2 id=\"" id "\">" value "</h2>"))))
 
 
 (defn render
