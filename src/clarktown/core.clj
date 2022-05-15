@@ -7,24 +7,11 @@
 
 (defn render
   "Renders the given `markdown` into a consumable HTML form. Optionally,
-  a second argument can be passed that is made out of a vector of parsers.
-
-  A parser is a map that consists of two things;
-  - A matcher (optional) , which returns a truthy or falsey value
-  - Renderers, which will be run on the a block when matcher returns true.
-    There can be any number of renderers. Each renderer must return a string.
-
-  Each matcher, and each renderer have to be a function that take a single
-  argument, which is a given Markdown block.
-
-  An example parser:
-  ```clojure
-  {:matcher (fn [block] ...)
-   :renderers [(fn [block] ...) (fn [block] ...)]}
-  ```"
+  a second argument can be passed to overwrite default parsers and
+  correctors.`"
   ([markdown]
-   (render markdown parsers/default-parsers))
-  ([markdown given-parsers]
-   (render markdown given-parsers correctors/default-correctors))
-  ([markdown given-parsers given-correctors]
-   (engine/render markdown given-parsers given-correctors)))
+   (render markdown {}))
+  ([markdown {:keys [parsers correctors] :or
+              {parsers parsers/default-parsers
+               correctors correctors/default-correctors}}]
+   (engine/render markdown parsers correctors)))
