@@ -20,4 +20,7 @@
 
   (testing "Creating an image"
     (is (= (link-and-image/render "![This is an image](https://example.com)" nil nil)
-           "<img src=\"https://example.com\" alt=\"This is an image\">"))))
+           "<img src=\"https://example.com\" alt=\"This is an image\">"))
+
+    (is (= (link-and-image/render "![](https://example.com)" nil nil)
+           "<img src=\"https://example.com\" alt=\"\">"))))
