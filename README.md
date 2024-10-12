@@ -9,13 +9,13 @@ An extensible and modular zero-dependency, pure-Clojure Markdown parser.
 #### Leiningen/Boot
 
 ```
-[com.github.askonomm/clarktown "2.0.0"]
+[com.github.askonomm/clarktown "2.0.1"]
 ```
 
 #### Clojure CLI/deps.edn
 
 ```
-com.github.askonomm/clarktown {:mvn/version "2.0.0"}
+com.github.askonomm/clarktown {:mvn/version "2.0.1"}
 ```
 
 ## Basic usage example
